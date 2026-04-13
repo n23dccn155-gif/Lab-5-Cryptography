@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.so
+.Python
+env/
+venv/
+.vscode/
+.idea/
+
+# Keys & sensitive data
+*.pem
+*.key
+*.crt
+
+# OS
+.DS_Store
+Thumbs.db
