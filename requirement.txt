@@ -1,0 +1,1 @@
+pycryptodome==3.21.0   # thư viện mạnh, hỗ trợ DES, 3DES, AES, RSA
