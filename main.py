@@ -7,7 +7,7 @@ from utils import print_error
 def main_menu():
     while True:
         print("\n" + "="*55)
-        print("🔐 CRYPTOGRAPHY TOOLKIT")
+        print(" CRYPTOGRAPHY TOOLKIT")
         print("="*55)
         print("1. Symmetric Encryption (DES / 3DES / AES)")
         print("2. Asymmetric Encryption (RSA)")
@@ -24,10 +24,10 @@ def main_menu():
         elif choice == "3":
             hash_menu()
         elif choice == "4":
-            print("👋 Cảm ơn bạn đã sử dụng chương trình!")
+            print(" Cảm ơn bạn đã sử dụng chương trình!")
             sys.exit(0)
         else:
-            print("❌ Lựa chọn không hợp lệ! Vui lòng nhập số từ 1-4.")
+            print(" Lựa chọn không hợp lệ! Vui lòng nhập số từ 1-4.")
 
 # ==================== SYMMETRIC MENU ====================
 def symmetric_menu():
@@ -46,7 +46,20 @@ def symmetric_menu():
     elif alg_choice == "3":
         algorithm = "AES"
     else:
-        print("❌ Lựa chọn không hợp lệ!")
+        print(" Lựa chọn không hợp lệ!")
+        return
+
+    # Chọn chế độ (Mode)
+    print("\n1. CBC (Khuyên dùng, an toàn hơn)")
+    print("2. ECB (Cơ bản, không dùng IV)")
+    mode_choice = input("Chọn chế độ mã hóa (1-2): ").strip()
+
+    if mode_choice == "1":
+        mode = "CBC"
+    elif mode_choice == "2":
+        mode = "ECB"
+    else:
+        print("Lựa chọn không hợp lệ!")
         return
 
     # Chọn chức năng
@@ -64,7 +77,7 @@ def symmetric_menu():
         if key_choice == "2":
             try:
                 key_hex = generate_random_key(algorithm)
-                print(f"🔑 Key ngẫu nhiên (hex): {key_hex}")
+                print(f" Key ngẫu nhiên (hex): {key_hex}")
             except Exception as e:
                 print_error(str(e))
                 return
@@ -72,8 +85,8 @@ def symmetric_menu():
             key_hex = input("Nhập Secret Key (dạng hex): ").strip()
         
         try:
-            ciphertext = symmetric_encrypt(algorithm, plaintext, key_hex)
-            print(f"\n✅ Ciphertext (hex):\n{ciphertext}")
+            ciphertext = symmetric_encrypt(algorithm, plaintext, key_hex, mode)
+            print(f"\n Ciphertext [{mode}] (hex):\n{ciphertext}")
         except Exception as e:
             print_error(str(e))
             
@@ -82,12 +95,12 @@ def symmetric_menu():
         key_hex = input("Nhập Secret Key (hex): ").strip()
         
         try:
-            plaintext = symmetric_decrypt(algorithm, ciphertext, key_hex)
-            print(f"\n✅ Plaintext:\n{plaintext}")
+            plaintext = symmetric_decrypt(algorithm, ciphertext, key_hex, mode)
+            print(f"\n Plaintext:\n{plaintext}")
         except Exception as e:
             print_error(str(e))
     else:
-        print("❌ Lựa chọn không hợp lệ!")
+        print("Lựa chọn không hợp lệ!")
 
 # ==================== ASYMMETRIC MENU ====================
 def asymmetric_menu():
@@ -100,8 +113,8 @@ def asymmetric_menu():
     if choice == "1":
         try:
             pub, priv = generate_rsa_key_pair()
-            print("\n🔑 Public Key (PEM):\n", pub)
-            print("\n🔒 Private Key (PEM):\n", priv)
+            print("\n Public Key (PEM):\n", pub)
+            print("\n Private Key (PEM):\n", priv)
         except Exception as e:
             print_error(str(e))
     
@@ -110,7 +123,7 @@ def asymmetric_menu():
         pub_key = input("\nDán Public Key (PEM):\n").strip()
         try:
             ct = rsa_encrypt(plaintext, pub_key)
-            print(f"\n✅ Ciphertext (hex):\n{ct}")
+            print(f"\n Ciphertext (hex):\n{ct}")
         except Exception as e:
             print_error(str(e))
     
@@ -119,11 +132,11 @@ def asymmetric_menu():
         priv_key = input("\nDán Private Key (PEM):\n").strip()
         try:
             pt = rsa_decrypt(ciphertext, priv_key)
-            print(f"\n✅ Plaintext:\n{pt}")
+            print(f"\n Plaintext:\n{pt}")
         except Exception as e:
             print_error(str(e))
     else:
-        print("❌ Lựa chọn không hợp lệ!")
+        print(" Lựa chọn không hợp lệ!")
 
 # ==================== HASH MENU ====================
 def hash_menu():
@@ -140,7 +153,7 @@ def hash_menu():
         elif choice == "2":
             print(f"\nSHA-256 : {sha256_hash(text)}")
         else:
-            print("❌ Lựa chọn không hợp lệ!")
+            print(" Lựa chọn không hợp lệ!")
     except Exception as e:
         print_error(str(e))
 
