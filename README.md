@@ -1,6 +1,6 @@
 # Lab-5-Cryptography
 
-Cryptography Toolkit - Đồ án mật mã học
+Cryptography Toolkit 
 
 ## Thành viên nhóm
 - Hiệp - Symmetric Encryption (DES, 3DES, AES)
