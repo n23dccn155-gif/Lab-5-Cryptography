@@ -49,3 +49,50 @@ def in_ket_qua(ten, gia_tri):
     print("=" * 40)
     print(ten + ":", gia_tri)
     print("=" * 40)
+if __name__ == "__main__":
+    print("=== Test utils.py - Duong Van Hay ===")
+    print("1. Kiem tra key DES")
+    print("2. Kiem tra key AES")
+    print("3. Kiem tra key 3DES")
+    print("4. Kiem tra o nhap trong")
+    print("5. Ghi va doc file")
+    print("0. Thoat")
+ 
+    while True:
+        chon = input("\nChon chuc nang (0-5): ")
+ 
+        if chon == "1":
+            key = input("Nhap key DES: ")
+            ket_qua = kiem_tra_key_des(key)
+            if ket_qua:
+                bao_ok("Key DES hop le!")
+ 
+        elif chon == "2":
+            key = input("Nhap key AES: ")
+            ket_qua = kiem_tra_key_aes(key)
+            if ket_qua:
+                bao_ok("Key AES hop le!")
+ 
+        elif chon == "3":
+            key = input("Nhap key 3DES: ")
+            ket_qua = kiem_tra_key_3des(key)
+            if ket_qua:
+                bao_ok("Key 3DES hop le!")
+ 
+        elif chon == "4":
+            text = input("Nhap du lieu (de trong de test loi): ")
+            ket_qua = kiem_tra_trong(text, "Du lieu nhap")
+            if ket_qua:
+                bao_ok("Du lieu hop le!")
+ 
+        elif chon == "5":
+            noi_dung = input("Nhap noi dung can ghi vao file: ")
+            ghi_file("test.txt", noi_dung)
+            print("Noi dung doc lai:", doc_file("test.txt"))
+ 
+        elif chon == "0":
+            print("Thoat chuong trinh.")
+            break
+ 
+        else:
+            bao_loi("Chon sai, vui long chon lai!")
