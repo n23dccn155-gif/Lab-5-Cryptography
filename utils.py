@@ -15,21 +15,24 @@ def ghi_file(duong_dan, noi_dung):
     f.close()
     print("Da ghi xong vao file:", duong_dan)
 
-def kiem_tra_key_des(key):
-    if len(key) != 8:
-        print("Loi: Key DES phai co dung 8 ky tu, ban nhap", len(key), "ky tu")
+def kiem_tra_key_des(key_hex):
+    # DES key 8 bytes = 16 hex characters
+    if len(key_hex) != 16:
+        print(f"Loi: Key DES (hex) phai co dung 16 ky tu hex (8 bytes), ban nhap {len(key_hex)} ky tu")
         return False
     return True
 
-def kiem_tra_key_3des(key):
-    if len(key) not in [16, 24]:
-        print("Loi: Key 3DES phai co 16 hoac 24 ky tu, ban nhap", len(key), "ky tu")
+def kiem_tra_key_3des(key_hex):
+    # 3DES key 16 or 24 bytes = 32 or 48 hex characters
+    if len(key_hex) not in [32, 48]:
+        print(f"Loi: Key 3DES (hex) phai co 32 hoac 48 ky tu hex, ban nhap {len(key_hex)} ky tu")
         return False
     return True
 
-def kiem_tra_key_aes(key):
-    if len(key) not in [16, 24, 32]:
-        print("Loi: Key AES phai co 16, 24 hoac 32 ky tu, ban nhap", len(key), "ky tu")
+def kiem_tra_key_aes(key_hex):
+    # AES key 16, 24, 32 bytes = 32, 48, 64 hex characters
+    if len(key_hex) not in [32, 48, 64]:
+        print(f"Loi: Key AES (hex) phai co 32, 48 hoac 64 ky tu hex, ban nhap {len(key_hex)} ky tu")
         return False
     return True
 
@@ -40,7 +43,10 @@ def kiem_tra_trong(text, ten_o="Du lieu"):
     return True
 
 def bao_loi(thong_bao):
-    print("[LOI]", thong_bao)
+    print(f"\n[!] LỖI: {thong_bao}")
+
+# Alias để main.py không bị lỗi import
+print_error = bao_loi
 
 def bao_ok(thong_bao):
     print("[OK]", thong_bao)

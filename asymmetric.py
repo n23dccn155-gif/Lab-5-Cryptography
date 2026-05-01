@@ -1,6 +1,6 @@
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
-import base64
+import binascii
 
 
 def generate_rsa_key_pair(key_size: int = 2048) -> tuple[str, str]:
@@ -18,18 +18,17 @@ def rsa_encrypt(plaintext: str, public_key_pem: str) -> str:
         cipher = PKCS1_OAEP.new(rsa_key)
 
         ciphertext = cipher.encrypt(plaintext.encode())
-        return base64.b64encode(ciphertext).decode()
+        return binascii.hexlify(ciphertext).decode()
 
     except Exception as e:
         return f"Error: {str(e)}"
 
-
-def rsa_decrypt(ciphertext_b64: str, private_key_pem: str) -> str:
+def rsa_decrypt(ciphertext_hex: str, private_key_pem: str) -> str:
     try:
         rsa_key = RSA.import_key(private_key_pem)
         cipher = PKCS1_OAEP.new(rsa_key)
 
-        decoded_data = base64.b64decode(ciphertext_b64)
+        decoded_data = binascii.unhexlify(ciphertext_hex)
         plaintext = cipher.decrypt(decoded_data)
 
         return plaintext.decode()
